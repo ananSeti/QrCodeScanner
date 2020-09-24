@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UDCH scanner</string>
+    <string name="qr_scanner_app">รพ.มะเร็งอุดรธานี</string>
+    <string name="Scan">Scan</string>
+    <string name="recent_scanned">Recent Scanned</string>
+    <string name="favourites">Favourites</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

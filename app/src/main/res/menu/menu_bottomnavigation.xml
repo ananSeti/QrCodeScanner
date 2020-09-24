@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/scanMenuId"
+        android:icon="@drawable/ic_qr_code"
+        android:title="@string/Scan" />
+    <item
+        android:id="@+id/recentScannedMenuId"
+        android:title="@string/recent_scanned"
+        android:icon="@drawable/ic_history_blue_24dp" />
+    <item android:id="@+id/favouritesMenuId"
+          android:title="@string/favourites"
+          android:icon="@drawable/ic_star_full_yellow_24dp"
+        />
+
+
+</menu>
