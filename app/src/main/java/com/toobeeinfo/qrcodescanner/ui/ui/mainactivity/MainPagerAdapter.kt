@@ -16,8 +16,8 @@ class MainPagerAdapter(var fm:FragmentManager) :FragmentStatePagerAdapter(fm) {
         //TODO 2.("Not yet implemented")
        return when(position){
            0->QrScannerFragment.newInstance()
-           1->ScannedHistoryFragment.newInstance()
-           2->ScannedHistoryFragment.newInstance()
+           1->ScannedHistoryFragment.newInstance(ScannedHistoryFragment.ResultListType.ALL_RESULT)
+           2->ScannedHistoryFragment.newInstance(ScannedHistoryFragment.ResultListType.FAVOURITE_RESULT)
            else -> QrScannerFragment.newInstance()
        }
     }

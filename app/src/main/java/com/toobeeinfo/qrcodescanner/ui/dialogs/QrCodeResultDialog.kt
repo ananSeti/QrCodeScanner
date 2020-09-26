@@ -7,6 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import com.toobeeinfo.qrcodescanner.R
+import com.toobeeinfo.qrcodescanner.ui.db.DBHelper
+import com.toobeeinfo.qrcodescanner.ui.db.DBHelperI
+import com.toobeeinfo.qrcodescanner.ui.db.database.QrResultDataBase
 import com.toobeeinfo.qrcodescanner.ui.db.entities.QrResult
 import com.toobeeinfo.qrcodescanner.ui.utils.toFormattedDisplay
 import kotlinx.android.synthetic.main.layout_qr_result_show.*
@@ -14,8 +17,17 @@ import kotlinx.android.synthetic.main.layout_qr_result_show.*
 class QrCodeResultDialog(var context: Context) {
     private lateinit var dialog:Dialog
     private var qrResult:QrResult? = null
+    private  lateinit var dbHelperI : DBHelperI
+    private var onDissmissListener :OnDissmissListener? = null
+
     init{
+        init()
         initDialog()
+    }
+
+    private fun init() {
+       // TODO("Not yet implemented")
+        dbHelperI = DBHelper(QrResultDataBase.getAppDatabase(context)!!)
     }
 
     private fun initDialog() {
@@ -25,7 +37,9 @@ class QrCodeResultDialog(var context: Context) {
        dialog.setCancelable(false)
        onClick()
                     }
-
+    fun setOnDissmissListener(dissmissListener: OnDissmissListener){
+        this.onDissmissListener = dissmissListener
+    }
     fun show(qrResult: QrResult){
        // val now:Date = Date()
         this.qrResult = qrResult
@@ -37,6 +51,11 @@ class QrCodeResultDialog(var context: Context) {
     private fun onClick() {
        // TODO 2.("Not yet implemented")
         dialog.favouriteIcon.setOnClickListener{
+         if(it.isSelected){
+             removeFromFavourite()
+         }else{
+             addToFavourite()
+         }
 
         }
         dialog.shareResult.setOnClickListener{
@@ -46,9 +65,22 @@ class QrCodeResultDialog(var context: Context) {
          copyResultToClipBoard()
         }
         dialog.cancelDialog.setOnClickListener{
-         dialog.dismiss()
+            onDissmissListener?.onDismiss()
+            dialog.dismiss()
 
         }
+    }
+
+    private fun addToFavourite() {
+       // TODO("Not yet implemented")
+        dialog.favouriteIcon.isSelected =true
+        dbHelperI.addToFavourite(qrResult?.id!!)
+    }
+
+    private fun removeFromFavourite() {
+       // TODO("Not yet implemented")
+        dialog.favouriteIcon.isSelected = false
+        dbHelperI.removeFromFavourite(qrResult?.id!!)
     }
 
     private fun shareResult() {
@@ -67,5 +99,7 @@ class QrCodeResultDialog(var context: Context) {
         Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
 
     }
-
+   interface OnDissmissListener{
+       fun onDismiss()
+   }
 }

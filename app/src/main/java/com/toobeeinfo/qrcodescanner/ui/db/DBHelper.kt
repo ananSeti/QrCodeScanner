@@ -19,6 +19,38 @@ class DBHelper(var qrResultDataBase: QrResultDataBase) :DBHelperI {
         return qrResultDataBase.getQrDao().getQrResult(id)
     }
 
+    override fun addToFavourite(id: Int): Int {
+       // TODO("Not yet implemented")
+        return qrResultDataBase.getQrDao().addToFavourite(id)
+    }
+
+    override fun removeFromFavourite(id: Int): Int {
+       // TODO("Not yet implemented")
+        return qrResultDataBase.getQrDao().removeFromFavourite(id)
+    }
+
+    override fun getAllQRScannedResult(): List<QrResult> {
+        //TODO("Not yet implemented")
+        return qrResultDataBase.getQrDao().getAllScannedResult()
+    }
+
+    override fun getAllFavouriteQRScannedResult(): List<QrResult> {
+       // TODO("Not yet implemented")
+        return qrResultDataBase.getQrDao().getAllFavouriteResult()
+    }
+    override fun deleteQrResult(id: Int): Int {
+        return qrResultDataBase.getQrDao().deleteQrResult(id)
+    }
+    override fun deleteAllQRScannedResult() {
+        //TODO("Not yet implemented")
+        return qrResultDataBase.getQrDao().deleteAllScannedResult()
+    }
+
+    override fun deleteAllFavouriteQRScannedResult() {
+        //TODO("Not yet implemented")
+        return qrResultDataBase.getQrDao().deleteAllFavouriteResult()
+    }
+
     private fun findResultType(result: String): String {
        return "TEXT"
     }

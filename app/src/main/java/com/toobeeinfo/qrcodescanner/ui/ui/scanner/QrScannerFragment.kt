@@ -86,6 +86,13 @@ class QrScannerFragment : Fragment() , ZXingScannerView.ResultHandler {
     private fun setResultDialog() {
        // TODO("Not yet implemented")
         resultDialog = QrCodeResultDialog(context!!)
+        resultDialog.setOnDissmissListener(object:QrCodeResultDialog.OnDissmissListener{
+            override fun onDismiss() {
+                //TODO("Not yet implemented")
+                scannerView.resumeCameraPreview(this@QrScannerFragment)
+            }
+        })
+
     }
 
     private fun onClicks() {
@@ -121,8 +128,9 @@ class QrScannerFragment : Fragment() , ZXingScannerView.ResultHandler {
         scannerView.setAutoFocus(true)
         scannerView.setSquareViewFinder(true)
         scannerView.setResultHandler(this)
-        mView.containerScanner.addView(scannerView)
         startQrCamera()
+        mView.containerScanner.addView(scannerView)
+
     }
     private fun startQrCamera(){
         scannerView.startCamera()
@@ -147,7 +155,7 @@ class QrScannerFragment : Fragment() , ZXingScannerView.ResultHandler {
        // TODO("Not yet implemented")
         onQrResult(rawResult!!.text)
        // Toast.makeText(context!!,rawResult?.text,Toast.LENGTH_SHORT).show()
-        scannerView.resumeCameraPreview(this)
+      //  scannerView.resumeCameraPreview(this)
     }
 
     private fun onQrResult(text: String?) {
@@ -156,6 +164,7 @@ class QrScannerFragment : Fragment() , ZXingScannerView.ResultHandler {
        }else{
            saveToDatabase(text)
        }
+
     }
 
     private fun saveToDatabase(result: String) {
